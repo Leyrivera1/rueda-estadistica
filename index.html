@@ -546,7 +546,7 @@ const FAM=[
  {id:"b_corr",lv:"bi",s:"Correlación",n:"Correlación y regresión simple"},
  {id:"b_2g",lv:"bi",s:"Comparar\n2 grupos",n:"Comparar 2 grupos o 2 mediciones"},
  {id:"b_kg",lv:"bi",s:"Comparar\n3+ grupos",n:"Comparar 3 o más grupos o mediciones"},
- {id:"b_diag",lv:"bi",s:"Exactitud\ndiagnóst.",n:"Exactitud diagnóstica"},
+ {id:"b_diag",lv:"bi",s:"Diagnóstico",n:"Exactitud diagnóstica"},
  {id:"m_comp",lv:"multi",s:"Comparar\najustando",n:"Comparar ajustando por otras variables"},
  {id:"m_reg",lv:"multi",s:"Regresiones",n:"Regresiones multivariables"},
  {id:"m_econ",lv:"multi",s:"Panel y\nevaluación",n:"Datos de panel y evaluación de impacto"},
@@ -564,7 +564,7 @@ const T=[
  cuando:"Siempre que la variable tenga categorías: sexo, nivel educativo, tipo de empresa, sentido de un fallo, presencia de un evento.",
  hip:NOH,lee:"El primer número es el conteo (n) y el paréntesis, el porcentaje sobre el total.",
  alt:[],src:["altman1991","rosner2016"],alias:"frecuencia absoluta relativa porcentaje n(%)"},
-{id:"prev",f:"u_frec",al:"des",n:"Prevalencia e incidencia",s:"Prevalencia\nincidencia",tipo:"Descriptiva",
+{id:"prev",f:"u_frec",al:"des",n:"Prevalencia e incidencia",s:"Prevalencia",tipo:"Descriptiva",
  vars:"1 variable dicotómica (sí/no) y la población estudiada.",dist:"No aplica.",
  para:"Medir la proporción de unidades con una condición en un momento (prevalencia) o los casos nuevos en un periodo (incidencia).",
  cuando:"Prevalencia en estudios transversales; incidencia en estudios de seguimiento. Se usa en salud, pero también para tasas de deserción, de reincidencia o de accidentes.",
@@ -791,7 +791,7 @@ const T=[
  hip:"H0: la mediana de las diferencias es cero (no hubo cambio). H1: es distinta de cero.",lee:"p < 0,05: hubo un cambio significativo entre las dos mediciones.",
  ef:"r = Z / √N.",
  alt:[{id:"tpar",w:"Si las diferencias son normales"},{id:"fried",w:"Si hay 3 o más mediciones"},{id:"signos",w:"Si solo importa el sentido del cambio o las diferencias son muy asimétricas"}],src:["wilcoxon1945","conover1999"],alias:"wilcoxon rangos con signo signed rank pareado"},
-{id:"signos",f:"b_2g",al:"rel",n:"Prueba de los signos",s:"Prueba de\nlos signos",tipo:"No paramétrica",
+{id:"signos",f:"b_2g",al:"rel",n:"Prueba de los signos",s:"Signos",tipo:"No paramétrica",
  vars:"1 variable ordinal o cuantitativa medida 2 veces en las mismas unidades, o una comparación pareada (A frente a B) en la que solo se sabe cuál es mayor.",dist:"No exige normalidad ni simetría de las diferencias. Los empates (sin cambio) se excluyen.",
  para:"Comparar dos mediciones relacionadas contando cuántas unidades mejoran y cuántas empeoran, sin usar el tamaño de las diferencias.",
  cuando:"Antes y después con escalas cortas o muy asimétricas, preferencias entre dos opciones evaluadas por las mismas personas, o cuando solo se registra si hubo aumento o disminución. Es menos potente que Wilcoxon, pero supone menos.",
@@ -904,7 +904,7 @@ const T=[
  cuando:"Estudios de casos y controles emparejados por edad, sexo, sede u otra característica.",
  hip:"Para cada variable: H0: OR ajustado = 1.",lee:"Se interpreta como la logística binaria, pero las comparaciones se hacen dentro de cada conjunto emparejado.",
  alt:[{id:"logb",w:"Si no hay emparejamiento"}],src:["breslow1980","hosmer2013"],alias:"logística condicional casos y controles emparejados matched"},
-{id:"logm",f:"m_reg",al:"exp",n:"Regresión logística multinomial u ordinal",s:"Logística\nmulti / ord.",tipo:"Modelo",
+{id:"logm",f:"m_reg",al:"exp",n:"Regresión logística multinomial u ordinal",s:"Log. multi / ord.",tipo:"Modelo",
  vars:"1 dependiente con 3 o más categorías (nominales u ordenadas) y varias independientes.",dist:"No exige normalidad. La ordinal supone odds proporcionales.",
  para:"Lo mismo que la logística binaria, pero cuando el resultado tiene varias categorías.",
  cuando:"Multinomial: categorías sin orden. Ordinal: categorías con orden (bajo, medio, alto).",
@@ -1070,7 +1070,7 @@ FAM:{
  b_corr:{s:"Correlation",n:"Correlation and simple regression"},
  b_2g:{s:"Compare\n2 groups",n:"Compare 2 groups or 2 measurements"},
  b_kg:{s:"Compare\n3+ groups",n:"Compare 3 or more groups or measurements"},
- b_diag:{s:"Diagnostic\naccuracy",n:"Diagnostic accuracy"},
+ b_diag:{s:"Diagnostic",n:"Diagnostic accuracy"},
  m_comp:{s:"Compare\nadjusting",n:"Compare while adjusting for other variables"},
  m_reg:{s:"Regressions",n:"Multivariable regressions"},
  m_econ:{s:"Panel and\nimpact",n:"Panel data and impact evaluation"},
@@ -1085,7 +1085,7 @@ frec:{n:"Frequencies and percentages",s:"Frequencies\nn (%)",tipo:"Descriptive",
  cuando:"Whenever the variable has categories: sex, education level, type of firm, case outcome, presence of an event.",
  hip:NOH_EN,lee:"The first number is the count (n) and the number in parentheses is the percentage of the total.",
  alt:[],alias:"absolute relative frequency percentage n(%)"},
-prev:{n:"Prevalence and incidence",s:"Prevalence\nincidence",tipo:"Descriptive",
+prev:{n:"Prevalence and incidence",s:"Prevalence",tipo:"Descriptive",
  vars:"1 dichotomous variable (yes/no) and the population studied.",dist:"Not applicable.",
  para:"Measure the proportion of units with a condition at one point in time (prevalence) or the new cases in a period (incidence).",
  cuando:"Prevalence in cross-sectional studies; incidence in follow-up studies. Used in health, but also for dropout, reoffending or accident rates.",
@@ -1311,7 +1311,7 @@ wil:{n:"Wilcoxon signed-rank test",s:"Wilcoxon",tipo:"Nonparametric",
  hip:"H0: the median of the differences is zero (no change). H1: it differs from zero.",lee:"p < .05: there was a significant change between the two measurements.",
  ef:"r = Z / √N.",
  alt:["If the differences are normal","If there are 3 or more measurements","If only the direction of change matters or the differences are very skewed"],alias:"wilcoxon signed rank paired"},
-signos:{n:"Sign test",s:"Sign\ntest",tipo:"Nonparametric",
+signos:{n:"Sign test",s:"Sign test",tipo:"Nonparametric",
  vars:"1 ordinal or quantitative variable measured twice on the same units, or a paired comparison (A vs. B) in which only the larger one is known.",dist:"Does not require normality or symmetric differences. Ties (no change) are excluded.",
  para:"Compare two related measurements by counting how many units improve and how many get worse, without using the size of the differences.",
  cuando:"Before and after with short or very skewed scales, preferences between two options rated by the same people, or when only an increase or decrease is recorded. It is less powerful than Wilcoxon's test but assumes less.",
@@ -1358,7 +1358,7 @@ posthoc:{n:"Multiple comparisons and post hoc tests",s:"Post hoc",tipo:"Correcti
  cuando:"After an ANOVA (Tukey), a Kruskal-Wallis test (Dunn) or when a study makes many comparisons (Holm, Benjamini-Hochberg).",
  hip:"For each pair: H0: the two groups are equal. H1: they differ.",lee:"Read the adjusted p-values: adjusted p < .05 means that pair differs. Tukey (1949) and Holm (1979) control the probability of any false positive; Benjamini and Hochberg (1995), the expected proportion of false positives.",
  alt:["Prior global test","Prior nonparametric global test"],alias:"post hoc tukey bonferroni holm benjamini hochberg fdr multiple comparisons dunn scheffe"},
-diag:{n:"Sensitivity, specificity and predictive values",s:"Sensitivity\nspecificity",tipo:"Diagnostic accuracy",
+diag:{n:"Sensitivity, specificity and predictive values",s:"Sens. / spec.",tipo:"Diagnostic accuracy",
  vars:"1 test or classifier with a positive/negative result and 1 true reference outcome.",dist:"Not applicable.",
  para:"Measure how well a test identifies cases (sensitivity) and non-cases (specificity), and how reliable a positive or negative result is (predictive values).",
  cuando:"Evaluating screening tests, alerts, classifiers or filters against a reference outcome.",
@@ -1423,7 +1423,7 @@ logcond:{n:"Conditional logistic regression",s:"Conditional\nlogistic",tipo:"Mod
  cuando:"Case-control studies matched on age, sex, site or another characteristic.",
  hip:"For each variable: H0: adjusted OR = 1.",lee:"It is interpreted like binary logistic regression, but comparisons are made within each matched set.",
  alt:["If there is no matching"],alias:"conditional logistic matched case control"},
-logm:{n:"Multinomial or ordinal logistic regression",s:"Multinomial /\nordinal",tipo:"Model",
+logm:{n:"Multinomial or ordinal logistic regression",s:"Multi / ord. logit",tipo:"Model",
  vars:"1 dependent variable with 3 or more categories (nominal or ordered) and several independent variables.",dist:"Does not require normality. The ordinal model assumes proportional odds.",
  para:"The same as binary logistic regression, but when the outcome has several categories.",
  cuando:"Multinomial: unordered categories. Ordinal: ordered categories (low, medium, high).",
@@ -1453,13 +1453,13 @@ panel:{n:"Panel data (fixed and random effects)",s:"Panel\ndata",tipo:"Econometr
  cuando:"Data sets with units repeated over time.",
  hip:"For each coefficient: H0: β = 0. Hausman: H0: random effects is consistent (no systematic difference from fixed effects).",lee:"With fixed effects, b is the change within the same unit when X changes. Hausman p < .05 favors fixed effects.",
  alt:["Multilevel models, more common outside economics","If you are evaluating a policy with a comparison group"],alias:"panel data fixed effects random effects hausman longitudinal econometrics"},
-did:{n:"Difference-in-differences",s:"Difference-in-\ndifferences",tipo:"Impact evaluation",
+did:{n:"Difference-in-differences",s:"Diff-in-diff",tipo:"Impact evaluation",
  vars:"A treated group and a comparison group, observed before and after an intervention.",dist:"Parallel trends assumption: without the intervention, both groups would have evolved the same way.",
  para:"Estimate the effect of a policy or intervention by comparing the change in the treated group with the change in the comparison group.",
  cuando:"Evaluating policies, programs or reforms that affect some units and not others. Card and Krueger (1994) is the classic example.",
  hip:"H0: the effect of the intervention (group × period interaction coefficient) is zero.",lee:"The interaction coefficient is the estimated effect. Pre-trends must be shown to be parallel.",
  alt:["More general panel models","If there is an instrument"],alias:"difference in differences DiD diff in diff impact evaluation policy"},
-iv:{n:"Instrumental variables",s:"Instrumental\nvariables",tipo:"Impact evaluation",
+iv:{n:"Instrumental variables",s:"Instrumental\nvar.",tipo:"Impact evaluation",
  vars:"An outcome, an endogenous explanatory variable and an instrument that affects the explanatory variable but not the outcome directly.",dist:"The instrument must be relevant (strong) and valid (unrelated to unobserved determinants of the outcome).",
  para:"Estimate causal effects when the explanatory variable is contaminated by confounding or simultaneity.",
  cuando:"When exposure cannot be randomized but there is an “as good as random” source of variation.",
@@ -1886,15 +1886,15 @@ function arc(a0,a1,r0,r1){let d=a1-a0;if(d<=1e-5)return"";if(d>0.99999){a1=a0+0.
 const mapA=a=>Math.max(0,Math.min(1,(a-view[0])/(view[1]-view[0])));
 function scale(){const w=svg.getBoundingClientRect().width;return w>0?w/640:1}
 function fit(n,lines,arcLen,thick,base,minFs){
- const nl=lines.length,mc=Math.max(...lines.map(s=>s.length)),cw=n.kind==="lv"?0.68:0.58;
+ const nl=lines.length,mc=Math.max(...lines.map(s=>s.length)),cw=n.kind==="lv"?0.68:0.54;
  if(mc*base*cw<=arcLen*0.86&&nl*base*1.12<=thick)return{mode:"tan",fs:base};
  const fsR=Math.min(base,thick/(mc*cw),arcLen*0.8/(nl*1.12));if(fsR>=minFs)return{mode:"rad",fs:fsR};
  const fsT=Math.min(base,arcLen*0.86/(mc*cw),thick/(nl*1.12));if(fsT>=minFs)return{mode:"tan",fs:fsT};
  return null}
 function place(n,a0,a1,base){
- const tx=n.tx;if(!tx)return;const d=a1-a0,minFs=7.6/scale();
+ const tx=n.tx;if(!tx)return;const d=a1-a0,minFs=6.8/scale();
  if(d<=1e-4){tx.style.display="none";return}
- const mid=(a0+a1)/2,deg=mid*360,[r0,r1]=n.r,rm=(r0+r1)/2,arcLen=d*2*Math.PI*rm,thick=r1-r0-10;
+ const mid=(a0+a1)/2,deg=mid*360,[r0,r1]=n.r,rm=(r0+r1)/2,arcLen=d*2*Math.PI*rm,thick=r1-r0-6;
  let lines=n.lines,f=fit(n,lines,arcLen,thick,base,minFs);
  if(!f&&n.one){lines=n.one;f=fit(n,lines,arcLen,thick,base,minFs)}
  if(!f){tx.style.display="none";return}
@@ -1903,7 +1903,7 @@ function place(n,a0,a1,base){
  tx.setAttribute("transform",`translate(${x.toFixed(2)},${y.toFixed(2)}) rotate(${rot.toFixed(2)})`);tx.setAttribute("font-size",f.fs.toFixed(2));
  const nl=lines.length;[...tx.children].forEach((s,i)=>s.setAttribute("y",((i-(nl-1)/2)*f.fs*1.12).toFixed(2)))}
 function render(){
- for(const n of nodes){const a0=mapA(n.obj.a0),a1=mapA(n.obj.a1);n.p.setAttribute("d",arc(a0,a1,n.r[0],n.r[1]));n.p.style.display=(a1-a0)<=1e-5?"none":"";if(n.tx)place(n,a0,a1,n.kind==="lv"?14:n.kind==="fam"?12:12.5)}
+ for(const n of nodes){const a0=mapA(n.obj.a0),a1=mapA(n.obj.a1);n.p.setAttribute("d",arc(a0,a1,n.r[0],n.r[1]));n.p.style.display=(a1-a0)<=1e-5?"none":"";if(n.tx)place(n,a0,a1,Math.max(n.kind==="lv"?14:n.kind==="fam"?12:12.5,(n.kind==="lv"?8.6:7.6)/scale()))}
  if(focus.k==="root"){ct1.textContent=u("ctA");ct2.textContent=u("ctB");gCenter.setAttribute("aria-label",u("ctAria0"))}
  else{ct1.textContent=u("ctBack");ct2.textContent=focus.k==="fam"?lvById[famById[focus.id].lv].n:u("ctAll");gCenter.setAttribute("aria-label",u("ctAria"))}}
 function inFilter(t){return filtSet?filtSet.includes(t.id):filt?t.al===filt:true}
