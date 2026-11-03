@@ -1,3 +1,7 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Rueda Estadística</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="author" content="Leidys-Helena Rivera-Quiroz">
@@ -261,6 +265,13 @@ footer{color:var(--muted);font-size:14px;max-width:76ch;display:grid;gap:8px}
 .dinotes{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:12px}
 .dinotes li{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--exp);border-radius:12px;padding:12px 14px;font-size:15px}
 .dinotes b{display:block;margin-bottom:3px}
+@media (max-width:620px){
+ .areas,.jump{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;scrollbar-width:none}
+ .areas::-webkit-scrollbar,.jump::-webkit-scrollbar{display:none}
+ .areas .area,.jump a,.areas .lbl{flex:none}
+ .lede{font-size:16px}
+ .kicker{font-size:11px}
+}
 .qend .big{font-family:var(--display);font-size:42px;font-weight:800}
 </style>
 
@@ -1559,7 +1570,7 @@ es:{
  k1b:"Anillo interno",k1:"Cuántas variables analizas a la vez.",k2b:"Anillo medio",k2:"Qué quieres hacer con ellas.",k3b:"Anillo externo y color",k3:"La prueba y su alcance.",
  wheelAria:"Rueda de pruebas estadísticas por nivel de análisis y alcance",crumbsAria:"Ubicación en la rueda",legendAria:"Resaltar por alcance",areasAria:"Área de los ejemplos",modesAria:"Forma de usar la rueda",
  ctA:"Toca un",ctB:"sector",ctBack:"← Volver",ctAll:"a toda la rueda",ctAria0:"Rueda completa",ctAria:"Volver",all:"Toda la rueda",
- hintSet:"Resaltadas: las pruebas que recomienda el asistente. Toca un alcance para cambiar el resaltado.",hint:"Toca un nivel o una familia para acercarte. Toca un alcance para ver hasta dónde llega en la rueda.",
+ hintSet:"Resaltadas: las pruebas que recomienda el asistente. Toca un alcance para cambiar el resaltado.",hint:"Toca un nivel o una familia para acercarte y ver los nombres. Toca un alcance para ver hasta dónde llega en la rueda.",
  c_scope:"Alcance",c_coh:"Cadena de coherencia",c_verb:"Verbo",c_an:"Análisis",c_test:"Prueba",c_para:"¿Para qué sirve?",c_vars:"Variables",c_dist:"Supuestos y distribución",c_when:"¿Cuándo se usa?",c_hyp:"Hipótesis en forma general",c_rule:"Regla general de lectura",
  c_ex:"Ejemplo en",c_sim:"Datos simulados",c_art:"Así aparece en un artículo",c_read:"Se lee así",c_else:"Caso contrario",c_ef:"Tamaño del efecto para reportar",c_care:"Cuidado",c_obj:"Objetivo coherente",c_alts:"Si no se cumple o buscas otra cosa",c_refs:"Referencias",
  c_link:"Enlace directo a esta ficha: agrega <code>#{id}</code> al final del enlace de la rueda.",
@@ -1619,7 +1630,7 @@ en:{
  k1b:"Inner ring",k1:"How many variables you analyze at once.",k2b:"Middle ring",k2:"What you want to do with them.",k3b:"Outer ring and color",k3:"The test and its scope.",
  wheelAria:"Wheel of statistical tests by level of analysis and scope",crumbsAria:"Position on the wheel",legendAria:"Highlight by scope",areasAria:"Field for the examples",modesAria:"How to use the wheel",
  ctA:"Tap a",ctB:"sector",ctBack:"← Back",ctAll:"to the whole wheel",ctAria0:"Whole wheel",ctAria:"Back",all:"Whole wheel",
- hintSet:"Highlighted: the tests the assistant recommends. Tap a scope to change the highlight.",hint:"Tap a level or a family to zoom in. Tap a scope to see how far it reaches on the wheel.",
+ hintSet:"Highlighted: the tests the assistant recommends. Tap a scope to change the highlight.",hint:"Tap a level or a family to zoom in and see the names. Tap a scope to see how far it reaches on the wheel.",
  c_scope:"Scope",c_coh:"Coherence chain",c_verb:"Verb",c_an:"Analysis",c_test:"Test",c_para:"What is it for?",c_vars:"Variables",c_dist:"Assumptions and distribution",c_when:"When is it used?",c_hyp:"Hypotheses in general form",c_rule:"General reading rule",
  c_ex:"Example in",c_sim:"Simulated data",c_art:"How it appears in an article",c_read:"How to read it",c_else:"Otherwise",c_ef:"Effect size to report",c_care:"Caution",c_obj:"Coherent objective",c_alts:"If assumptions fail or you need something else",c_refs:"References",
  c_link:"Direct link to this card: add <code>#{id}</code> to the end of the wheel's link.",
