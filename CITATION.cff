@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "Si usas esta herramienta, por favor cítala así."
+title: "Rueda Estadística: guía interactiva de pruebas estadísticas"
+type: software
+authors:
+  - family-names: "Rivera-Quiroz"
+    given-names: "Leidys-Helena"
+    orcid: "https://orcid.org/0000-0003-1926-2521"
+version: "1.0"
+date-released: "2026-11-03"
+doi: "10.5281/zenodo.23925941"
+license: CC-BY-4.0
+abstract: >-
+  Herramienta interactiva que organiza 73 pruebas estadísticas en una rueda
+  de tres niveles (univariado, bivariado y multivariado), coloreadas según su
+  alcance de investigación (descriptivo, relacional, explicativo y predictivo).
+  Permite partir de la prueba leída en un artículo o de un asistente de
+  decisión. Cada ficha incluye supuestos, hipótesis, regla de lectura,
+  ejemplos de interpretación en siete áreas y referencias en APA 7.
+keywords:
+  - estadística
+  - pruebas estadísticas
+  - metodología cuantitativa
+  - alcance de la investigación
+  - análisis univariado
+  - análisis bivariado
+  - análisis multivariado
+  - interpretación del valor p
+  - educación en estadística
