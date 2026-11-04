@@ -1818,6 +1818,10 @@ const COMPNOTE={
 es:{fisher:"Fisher si no se cumple la regla de frecuencias esperadas del chi-cuadrado (Cochran, 1954).",trend:"Si las categorías del grupo tienen orden, usa la prueba de tendencia.",cq:"Si la variable es sí/no.",mcn:"Si la variable tiene 3 o más categorías, usa Stuart-Maxwell.",sg:"Si solo importa el sentido del cambio (mejoró o empeoró), usa la prueba de los signos.",welch:"Si las varianzas son distintas, usa Welch; Delacre et al. (2017) recomiendan usarla por defecto.",ph:"Si el ANOVA da p < 0,05, una prueba post hoc indica qué grupos difieren.",mix:"Modelos mixtos si hay datos faltantes o tiempos distintos.",dunn:"Si Kruskal-Wallis da p < 0,05, se compara por pares con la prueba de Dunn."},
 en:{fisher:"Fisher's test if the chi-square expected-frequency rule is not met (Cochran, 1954).",trend:"If the group categories are ordered, use the trend test.",cq:"If the variable is yes/no.",mcn:"If the variable has 3 or more categories, use Stuart-Maxwell.",sg:"If only the direction of change matters (better or worse), use the sign test.",welch:"If the variances differ, use Welch's test; Delacre et al. (2017) recommend using it by default.",ph:"If the ANOVA gives p < .05, a post hoc test shows which groups differ.",mix:"Mixed models if there are missing data or unequal times.",dunn:"If Kruskal-Wallis gives p < .05, pairs are compared with Dunn's test."}};
 
+// Etiquetas cortas de familias para pantallas de celular.
+const PFAM={es:{u_frec:"Conteos",u_res:"Resumen",u_norm:"¿Normal?",u_inf:"Una\nmuestra",u_proc:"Procesos",b_des:"Tablas",b_surv:"Superviv.",b_asoc:"Asocia-\nción",b_conc:"Concor-\ndancia",b_corr:"Correla-\nción",b_2g:"2 grupos",b_kg:"3+ grupos",m_comp:"Comparar\najustando",m_reg:"Regresio-\nnes",m_econ:"Impacto",m_pred:"Predecir",m_inst:"Medición",m_red:"Reducir y\nagrupar"},
+en:{u_frec:"Counts",u_res:"Summary",u_norm:"Normal?",u_inf:"One\nsample",u_proc:"Process",b_des:"Tables",b_surv:"Survival",b_asoc:"Associa-\ntion",b_conc:"Agree-\nment",b_corr:"Correla-\ntion",b_2g:"2 groups",b_kg:"3+ groups",m_comp:"Compare\nadjusted",m_reg:"Regres-\nsions",m_econ:"Impact",m_pred:"Predict",m_inst:"Measure-\nment",m_red:"Reduce &\ngroup"}};
+
 // Supuestos estructurados por prueba. d = datos; s = supuestos; r = cómo se revisa.
 // t = etiquetas de supuestos (para el modo de práctica); k = índice del supuesto distintivo en s.
 const NA_ES="La normalidad no aplica: la variable es cualitativa.";
@@ -2029,7 +2033,7 @@ svg.append(gArcs,gTxt,gCenter);
 let booted=false,view=[0,1],focus={k:"root"},sel="mw",filt=null,filtSet=null,anim=0;
 let nodes=[];
 function joinLines(lines){const keep=lang==="en"?/(Chi|Cross|Meta|in)-$/:/Chi-$/;let s=lines[0];for(let i=1;i<lines.length;i++){const p=s,n=lines[i];if(p.endsWith("-")&&/^[a-záéíóúñ]/.test(n)&&!keep.test(p))s=p.slice(0,-1)+n;else if(p.endsWith("-"))s=p+n;else s=p+" "+n}return s}
-function setLines(n,lines){if(n.cur===lines)return;n.cur=lines;n.tx.textContent="";lines.forEach((ln,i)=>{const s=el("tspan",{x:0});if(n.kind==="lv"&&i===1)s.setAttribute("class","sub");s.textContent=ln;n.tx.appendChild(s)})}
+function setLines(n,lines){if(n.cur===lines)return;n.cur=lines;n.tx.textContent="";lines.forEach((ln,i)=>{const s=el("tspan",{x:0});if(n.kind==="lv"&&i===1&&lines!==n.plines)s.setAttribute("class","sub");s.textContent=ln;n.tx.appendChild(s)})}
 function addNode(kind,obj,r,fill,lines,cls){
   const p=el("path",{fill});const tt=el("title");tt.textContent=kind==="fam"?famById[obj.id].n:obj.n;p.appendChild(tt);gArcs.appendChild(p);
   let tx=null;if(lines){tx=el("text",{class:cls||""});gTxt.appendChild(tx)}
@@ -2039,13 +2043,13 @@ function addNode(kind,obj,r,fill,lines,cls){
 }
 function buildWheel(){
  gArcs.textContent="";gTxt.textContent="";nodes=[];
- LV.forEach(l=>addNode("lv",l,R_.lv,`var(--lv-${l.id})`,[l.s,l.sub],"lvt"));
- FAM.forEach(f=>addNode("fam",f,R_.fam,"var(--fam)",f.s.split("\n")));
+ LV.forEach(l=>{addNode("lv",l,R_.lv,`var(--lv-${l.id})`,[l.s,l.sub],"lvt");{const P={uni:"UNI-",bi:"BI-",multi:"MULTI-"}[l.id];nodes[nodes.length-1].plines=[P,lang==="en"?"VARIATE":"VARIADO"]}});
+ FAM.forEach(f=>{addNode("fam",f,R_.fam,"var(--fam)",f.s.split("\n"));const n=nodes[nodes.length-1],p=PFAM[lang][f.id];if(p){n.plines=p.split("\n");n.pone=n.plines.length>1?[joinLines(n.plines)]:null}});
  ORDER.forEach(t=>addNode("t",t,R_.t,alTint(t.al),t.s.split("\n")));
  ORDER.forEach(t=>addNode("band",t,R_.band,alColor(t.al),null));
  svg.setAttribute("aria-label",u("wheelAria"))}
 const ctrC=el("circle",{cx:C,cy:C,r:66});gCenter.appendChild(ctrC);
-const GEOM={wide:{lv:[70,124],fam:[125,190],t:[191,288],band:[289,306],c:66},phone:{lv:[50,92],fam:[93,146],t:[147,300],band:[301,314],c:48}};
+const GEOM={wide:{lv:[70,124],fam:[125,190],t:[191,288],band:[289,306],c:66},phone:{lv:[42,84],fam:[85,148],t:[149,300],band:[301,314],c:40}};
 let geomNow="";function geom(){const w=svg.getBoundingClientRect().width,g=w>0&&w<520?"phone":"wide";if(g===geomNow)return;geomNow=g;const G=GEOM[g];for(const k of ["lv","fam","t","band"]){R_[k][0]=G[k][0];R_[k][1]=G[k][1]}ctrC.setAttribute("r",G.c);ct1.setAttribute("y",C-(g==="phone"?7:10));ct2.setAttribute("y",C+(g==="phone"?11:14));nodes.forEach(n=>n.cur=null)}
 const ct1=el("text",{x:C,y:C-10,class:"big"}),ct2=el("text",{x:C,y:C+14});gCenter.append(ct1,ct2);
 gCenter.addEventListener("click",zoomOut);gCenter.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();zoomOut()}});
@@ -2056,17 +2060,18 @@ function arc(a0,a1,r0,r1){let d=a1-a0;if(d<=1e-5)return"";if(d>0.99999){a1=a0+0.
 const mapA=a=>Math.max(0,Math.min(1,(a-view[0])/(view[1]-view[0])));
 function scale(){const w=svg.getBoundingClientRect().width;return w>0?w/640:1}
 function fit(n,lines,arcLen,thick,base,minFs){
- const nl=lines.length,mc=Math.max(...lines.map(s=>s.length)),cw=n.kind==="lv"?0.68:0.54;
- if(mc*base*cw<=arcLen*0.86&&nl*base*1.12<=thick)return{mode:"tan",fs:base};
+ const nl=lines.length,mc=Math.max(...lines.map(s=>s.length)),cw=n.kind==="lv"?0.68:0.54,[r0,r1]=n.r,rm=(r0+r1)/2;
+ const tanOK=fs=>{const w=mc*fs*cw,h=nl*fs*1.12;return w<=arcLen*0.86&&h<=thick&&Math.hypot(rm+h/2,w/2)<=r1-2};
+ if(tanOK(base))return{mode:"tan",fs:base};
  const fsR=Math.min(base,thick/(mc*cw),arcLen*0.8/(nl*1.12));if(fsR>=minFs)return{mode:"rad",fs:fsR};
- const fsT=Math.min(base,arcLen*0.86/(mc*cw),thick/(nl*1.12));if(fsT>=minFs)return{mode:"tan",fs:fsT};
+ let fsT=Math.min(base,arcLen*0.86/(mc*cw),thick/(nl*1.12));while(fsT>=minFs&&!tanOK(fsT))fsT*=0.95;if(fsT>=minFs)return{mode:"tan",fs:fsT};
  return null}
 function place(n,a0,a1,base){
  const tx=n.tx;if(!tx)return;const d=a1-a0,minFs=(geomNow==="phone"?(svg.getBoundingClientRect().width<300?5.6:6.1):6.8)/scale();
  if(d<=1e-4){tx.style.display="none";return}
  const mid=(a0+a1)/2,deg=mid*360,[r0,r1]=n.r,rm=(r0+r1)/2,arcLen=d*2*Math.PI*rm,thick=r1-r0-6;
- let lines=n.lines,f=fit(n,lines,arcLen,thick,base,minFs);
- if(!f&&n.one){lines=n.one;f=fit(n,lines,arcLen,thick,base,minFs)}
+ const ph=geomNow==="phone"&&n.plines;let lines=ph?n.plines:n.lines,f=fit(n,lines,arcLen,thick,base,minFs);
+ const one=ph?n.pone:n.one;if(!f&&one){lines=one;f=fit(n,lines,arcLen,thick,base,minFs)}
  if(!f){tx.style.display="none";return}
  setLines(n,lines);tx.style.display="";
  const[x,y]=pt(mid,rm),rot=f.mode==="tan"?deg+((deg>90&&deg<270)?180:0):deg-90+(deg>180?180:0);
